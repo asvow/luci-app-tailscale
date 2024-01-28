@@ -29,12 +29,9 @@ function getServiceStatus() {
 }
 
 function getLoginStatus() {
-	return fs.exec("/usr/sbin/tailscale", ["status"]).then(function(res) {
-		if (res.stdout.includes("Logged out")) {
-			return false;
-		} else {
-			return true;
-		}
+	return fs.exec("/usr/sbin/tailscale", ["status", "--json"]).then(function(res) {
+		var status = JSON.parse(res.stdout);
+		return status.BackendState;
 	}).catch(function(error) {
 		return undefined;
 	});
@@ -52,15 +49,13 @@ function renderStatus(isRunning) {
 	return renderHTML;
 }
 
-function renderLogin(isLoggedIn) {
+function renderLogin(loginStatus) {
 	var spanTemp = '<span style="color:%s">%s</span>';
 	var renderHTML;
-	if (isLoggedIn === undefined) {
+	if (loginStatus === undefined) {
 		renderHTML = String.format(spanTemp, 'orange', _('NOT RUNNING'));
-	} else if (isLoggedIn) {
-		renderHTML = String.format(spanTemp, 'green', _('Logged IN'));
 	} else {
-		renderHTML = String.format(spanTemp, 'red', _('Logged OUT'));
+		renderHTML = String.format(spanTemp, loginStatus === "NeedsLogin" ? 'red' : 'green', loginStatus === "NeedsLogin" ? _('Needs Login') : _('Logged IN'));
 	}
 
 	return renderHTML;
