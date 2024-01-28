@@ -30,10 +30,13 @@ function getServiceStatus() {
 
 function getLoginStatus() {
 	return fs.exec("/usr/sbin/tailscale", ["status"]).then(function(res) {
-		if (res.stdout.includes("Logged out"))
+		if (res.stdout.includes("Logged out")) {
 			return false;
-		else
+		} else {
 			return true;
+		}
+	}).catch(function(error) {
+		return undefined;
 	});
 }
 
@@ -50,12 +53,14 @@ function renderStatus(isRunning) {
 }
 
 function renderLogin(isLoggedIn) {
-	var spanTemp = '<em><span style="color:%s"><strong>%s %s</strong></span></em>';
+	var spanTemp = '<span style="color:%s">%s</span>';
 	var renderHTML;
-	if (isLoggedIn) {
-		renderHTML = String.format(spanTemp, 'green', _('Logged'), _('IN'));
+	if (isLoggedIn === undefined) {
+		renderHTML = String.format(spanTemp, 'orange', _('NOT RUNNING'));
+	} else if (isLoggedIn) {
+		renderHTML = String.format(spanTemp, 'green', _('Logged IN'));
 	} else {
-		renderHTML = String.format(spanTemp, 'red', _('Logged'), _('OUT'));
+		renderHTML = String.format(spanTemp, 'red', _('Logged OUT'));
 	}
 
 	return renderHTML;
@@ -64,12 +69,14 @@ function renderLogin(isLoggedIn) {
 return view.extend({
 	load: function() {
 		return Promise.all([
-			uci.load('tailscale')
+			uci.load('tailscale'),
+			getServiceStatus()
 		]);
 	},
 
 	render: function(data) {
 		var m, s, o;
+		var isRunning = data[1];
 
 		m = new form.Map('tailscale', _('Tailscale'),
 			_('Tailscale is a cross-platform and easy to use virtual LAN.'));
@@ -77,15 +84,8 @@ return view.extend({
 		s = m.section(form.TypedSection);
 		s.anonymous = true;
 		s.render = function () {
-			poll.add(function () {
-				return L.resolveDefault(getServiceStatus()).then(function (res) {
-					var view = document.getElementById("service_status");
-					view.innerHTML = renderStatus(res);
-				});
-			});
-
 			return E('div', { class: 'cbi-section', id: 'status_bar' }, [
-					E('p', { id: 'service_status' }, _('Collecting data ...'))
+					E('p', { id: 'service_status' }, renderStatus(isRunning))
 			]);
 		}
 
