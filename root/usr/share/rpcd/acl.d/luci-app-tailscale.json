@@ -3,7 +3,8 @@
 		"description": "Grant access to Tailscale configuration",
 		"read": {
 			"file": {
-				"/sbin/ifconfig": [ "exec" ]
+				"/sbin/ifconfig": [ "exec" ],
+				"/usr/sbin/tailscale": [ "exec" ]
 			},
 			"ubus": {
 				"service": [ "list" ]

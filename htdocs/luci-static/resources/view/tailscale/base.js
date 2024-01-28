@@ -5,6 +5,7 @@
 
 'use strict';
 'require form';
+'require fs';
 'require poll';
 'require rpc';
 'require uci';
@@ -27,6 +28,15 @@ function getServiceStatus() {
 	});
 }
 
+function getLoginStatus() {
+	return fs.exec("/usr/sbin/tailscale", ["status"]).then(function(res) {
+		if (res.stdout.includes("Logged out"))
+			return false;
+		else
+			return true;
+	});
+}
+
 function renderStatus(isRunning) {
 	var spanTemp = '<em><span style="color:%s"><strong>%s %s</strong></span></em>';
 	var renderHTML;
@@ -34,6 +44,18 @@ function renderStatus(isRunning) {
 		renderHTML = String.format(spanTemp, 'green', _('Tailscale'), _('RUNNING'));
 	} else {
 		renderHTML = String.format(spanTemp, 'red', _('Tailscale'), _('NOT RUNNING'));
+	}
+
+	return renderHTML;
+}
+
+function renderLogin(isLoggedIn) {
+	var spanTemp = '<em><span style="color:%s"><strong>%s %s</strong></span></em>';
+	var renderHTML;
+	if (isLoggedIn) {
+		renderHTML = String.format(spanTemp, 'green', _('Logged'), _('IN'));
+	} else {
+		renderHTML = String.format(spanTemp, 'red', _('Logged'), _('OUT'));
 	}
 
 	return renderHTML;
@@ -72,7 +94,18 @@ return view.extend({
 		o = s.option(form.Flag, 'enabled', _('Enable'));
 		o.default = o.disabled;
 		o.rmempty = false;
-
+		
+		o = s.option(form.DummyValue, 'login_status', _('Login Status'));
+		o.depends('enabled', '1');
+		o.renderWidget = function(section_id, option_id) {
+			poll.add(function() {
+				return L.resolveDefault(getLoginStatus()).then(function(res) {
+					document.getElementById('login_status_div').innerHTML = renderLogin(res);
+				});
+			});
+	
+			return E('div', { 'id': 'login_status_div' }, _('Collecting data ...'));
+		};
 
 		return m.render();
 	}
