@@ -31,9 +31,15 @@ function getServiceStatus() {
 function getLoginStatus() {
 	return fs.exec("/usr/sbin/tailscale", ["status", "--json"]).then(function(res) {
 		var status = JSON.parse(res.stdout);
-		return status.BackendState;
+		if (!status.AuthURL && status.BackendState == "NeedsLogin") {
+			fs.exec("/usr/sbin/tailscale", ["login"]);
+		}
+		return {
+			backendState: status.BackendState,
+			authURL: status.AuthURL
+		};
 	}).catch(function(error) {
-		return undefined;
+		return { backendState: undefined, authURL: undefined };
 	});
 }
 
@@ -49,13 +55,17 @@ function renderStatus(isRunning) {
 	return renderHTML;
 }
 
-function renderLogin(loginStatus) {
+function renderLogin(loginStatus, authURL) {
 	var spanTemp = '<span style="color:%s">%s</span>';
 	var renderHTML;
-	if (loginStatus === undefined) {
+	if (loginStatus.backendState == undefined) {
 		renderHTML = String.format(spanTemp, 'orange', _('NOT RUNNING'));
 	} else {
-		renderHTML = String.format(spanTemp, loginStatus === "NeedsLogin" ? 'red' : 'green', loginStatus === "NeedsLogin" ? _('Needs Login') : _('Logged IN'));
+		if (loginStatus.backendState == "NeedsLogin") {
+			renderHTML = String.format('<a href="%s" target="_blank">%s</a>', authURL, _('Needs Login'));
+		} else {
+			renderHTML = String.format(spanTemp, 'green', _('Logged IN'));
+		}
 	}
 
 	return renderHTML;
@@ -95,7 +105,7 @@ return view.extend({
 		o.renderWidget = function(section_id, option_id) {
 			poll.add(function() {
 				return L.resolveDefault(getLoginStatus()).then(function(res) {
-					document.getElementById('login_status_div').innerHTML = renderLogin(res);
+					document.getElementById('login_status_div').innerHTML = renderLogin(res, res.authURL);
 				});
 			});
 	
