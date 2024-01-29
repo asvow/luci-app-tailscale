@@ -58,13 +58,13 @@ function renderStatus(isRunning) {
 function renderLogin(loginStatus, authURL) {
 	var spanTemp = '<span style="color:%s">%s</span>';
 	var renderHTML;
-	if (loginStatus.backendState == undefined) {
+	if (loginStatus == undefined) {
 		renderHTML = String.format(spanTemp, 'orange', _('NOT RUNNING'));
 	} else {
-		if (loginStatus.backendState == "NeedsLogin") {
+		if (loginStatus == "NeedsLogin") {
 			renderHTML = String.format('<a href="%s" target="_blank">%s</a>', authURL, _('Needs Login'));
 		} else {
-			renderHTML = String.format(spanTemp, 'green', _('Logged IN'));
+			renderHTML = String.format(spanTemp, 'green', _('Logged In'));
 		}
 	}
 
@@ -105,7 +105,7 @@ return view.extend({
 		o.renderWidget = function(section_id, option_id) {
 			poll.add(function() {
 				return L.resolveDefault(getLoginStatus()).then(function(res) {
-					document.getElementById('login_status_div').innerHTML = renderLogin(res, res.authURL);
+					document.getElementById('login_status_div').innerHTML = renderLogin(res.backendState, res.authURL);
 				});
 			});
 	
