@@ -171,6 +171,9 @@ return view.extend({
 
 		s = m.section(form.NamedSection, 'settings', 'config');
 		s.title = _('Custom Server Settings');
+		s.description = _('Use ') +
+		'<a href="https://github.com/juanfont/headscale" target="_blank">headscale</a>' +
+		_(' to deploy a private server.');
 
 		o = s.option(form.Value, 'loginServer', _('Server address'));
 		o.default = '';
