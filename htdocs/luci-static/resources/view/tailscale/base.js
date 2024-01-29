@@ -151,7 +151,7 @@ return view.extend({
 		o.default = o.disabled;
 		o.rmempty = false;
 
-		o = s.option(form.Value, 'hostname', _('Hostname'), _("Leave blank to use the device's hostname."));
+		o = s.option(form.Value, 'hostname', _('Devicename'), _("Leave blank to use the device's hostname."));
 		o.default = '';
 		o.rmempty = true;
 
@@ -171,9 +171,7 @@ return view.extend({
 
 		s = m.section(form.NamedSection, 'settings', 'config');
 		s.title = _('Custom Server Settings');
-		s.description = _('Use ') +
-		'<a href="https://github.com/juanfont/headscale" target="_blank">headscale</a>' +
-		_(' to deploy a private server.');
+		s.description = String.format(_('Use %s to deploy a private server.'), '<a href="https://github.com/juanfont/headscale" target="_blank">headscale</a>');
 
 		o = s.option(form.Value, 'loginServer', _('Server address'));
 		o.default = '';

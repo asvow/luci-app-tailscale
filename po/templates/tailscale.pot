@@ -92,7 +92,7 @@ msgid "Expose physical network routes onto Tailscale."
 msgstr ""
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:154
-msgid "Hostname"
+msgid "Devicename"
 msgstr ""
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:154
@@ -132,18 +132,14 @@ msgid "Custom Server Settings"
 msgstr ""
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:174
-msgid "Use "
+msgid "Use %s to deploy a private server."
 msgstr ""
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:176
-msgid " to deploy a private server."
-msgstr ""
-
-#: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:178
 msgid "Server address"
 msgstr ""
 
-#: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:182
+#: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:180
 msgid "Auth Key"
 msgstr ""
 

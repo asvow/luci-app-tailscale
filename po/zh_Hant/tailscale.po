@@ -18,7 +18,7 @@ msgstr "未運行"
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:64
 msgid "Needs Login"
-msgstr "未登录"
+msgstr "未登錄"
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:67
 msgid "Logout and Unbind"
@@ -98,7 +98,7 @@ msgid "Expose physical network routes onto Tailscale."
 msgstr "將物理網絡路由暴露到Tailscale上。"
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:154
-msgid "Hostname"
+msgid "Devicename"
 msgstr "設備名稱"
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:154
@@ -138,18 +138,14 @@ msgid "Custom Server Settings"
 msgstr "自定義服務器"
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:174
-msgid "Use "
-msgstr "使用"
+msgid "Use %s to deploy a private server."
+msgstr "使用 %s 部署私有服務器"
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:176
-msgid " to deploy a private server."
-msgstr "部署私有服務器"
-
-#: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:178
 msgid "Server address"
 msgstr "服務器地址"
 
-#: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:182
+#: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:180
 msgid "Auth Key"
 msgstr "令牌"
 
