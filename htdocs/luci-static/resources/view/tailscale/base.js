@@ -34,12 +34,14 @@ function getLoginStatus() {
 		if (!status.AuthURL && status.BackendState == "NeedsLogin") {
 			fs.exec("/usr/sbin/tailscale", ["login"]);
 		}
+		var displayName = status.BackendState == "Running" ? status.User[status.Self.UserID].DisplayName : undefined;
 		return {
 			backendState: status.BackendState,
-			authURL: status.AuthURL
+			authURL: status.AuthURL,
+			displayName: displayName
 		};
 	}).catch(function(error) {
-		return { backendState: undefined, authURL: undefined };
+		return { backendState: undefined, authURL: undefined, displayName: undefined };
 	});
 }
 
@@ -55,17 +57,16 @@ function renderStatus(isRunning) {
 	return renderHTML;
 }
 
-function renderLogin(loginStatus, authURL) {
+function renderLogin(loginStatus, authURL, displayName) {
 	var spanTemp = '<span style="color:%s">%s</span>';
 	var renderHTML;
-	if (loginStatus == undefined) {
-		renderHTML = String.format(spanTemp, 'orange', _('NOT RUNNING'));
+	if (loginStatus == "NeedsLogin") {
+		renderHTML = String.format('<a href="%s" target="_blank">%s</a>', authURL, _('Needs Login'));
+	} else if (loginStatus == "Running") {
+		renderHTML = String.format('<a href="%s" target="_blank">%s</a>', 'https://login.tailscale.com/admin/machines', displayName);
+		renderHTML += String.format('<br><a style="color:green" id="logout_button">%s</a>', _('Logout and Unbind'));
 	} else {
-		if (loginStatus == "NeedsLogin") {
-			renderHTML = String.format('<a href="%s" target="_blank">%s</a>', authURL, _('Needs Login'));
-		} else {
-			renderHTML = String.format(spanTemp, 'green', _('Logged In'));
-		}
+		renderHTML = String.format(spanTemp, 'orange', _('NOT RUNNING'));
 	}
 
 	return renderHTML;
@@ -83,9 +84,7 @@ return view.extend({
 		var m, s, o;
 		var isRunning = data[1];
 
-		var tailscaleLink = E('a', { href: 'https://login.tailscale.com/admin/machines', target: '_blank' }, _('Tailscale'));
-		var description = E('span', {}, _(' is a cross-platform and easy to use virtual LAN.'));
-		m = new form.Map('tailscale', _('Tailscale'), [tailscaleLink, description]);
+		m = new form.Map('tailscale', _('Tailscale'), _('Tailscale is a cross-platform and easy to use virtual LAN.'));
 
 		s = m.section(form.TypedSection);
 		s.anonymous = true;
@@ -107,7 +106,15 @@ return view.extend({
 		o.renderWidget = function(section_id, option_id) {
 			poll.add(function() {
 				return Promise.resolve(getLoginStatus()).then(function(res) {
-					document.getElementById('login_status_div').innerHTML = renderLogin(res.backendState, res.authURL);
+					document.getElementById('login_status_div').innerHTML = renderLogin(res.backendState, res.authURL, res.displayName);
+					var logoutButton = document.getElementById('logout_button');
+					if (logoutButton) {
+						logoutButton.onclick = function() {
+							if (confirm(_('Are you sure you want to logout and unbind the current device?'))) {
+								fs.exec("/usr/sbin/tailscale", ["logout"]);
+							}
+						}
+					}
 				});
 			});
 
@@ -144,8 +151,7 @@ return view.extend({
 		o.default = o.disabled;
 		o.rmempty = false;
 
-		o = s.option(form.Value, 'hostname', _('Hostname'),
-			_("Leave blank to use the device's hostname."));
+		o = s.option(form.Value, 'hostname', _('Hostname'), _("Leave blank to use the device's hostname."));
 		o.default = '';
 		o.rmempty = true;
 
