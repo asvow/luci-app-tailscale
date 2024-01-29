@@ -10,7 +10,7 @@ Tailscale is a zero config VPN for building secure networks.
 
   *1. replace the default startup script and configuration of Tailscale.*
   ```shell
-  sed -i '/\/etc\/init\.d\/tailscale\|\/etc\/config\/tailscale/d' feeds/packages/net/tailscale/Makefile
+  sed -i '/\/etc\/init\.d\/tailscale/d;/\/etc\/config\/tailscale/d;' feeds/packages/net/tailscale/Makefile
   ```
 
   *2. get luci-app-tailscale source & building*
