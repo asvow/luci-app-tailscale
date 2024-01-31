@@ -30,7 +30,7 @@ Tailscale is a zero config VPN for building secure networks.
 
   ```shell
   opkg update
-  opkg install --force-overwrite luci-app-tailscale_*_all.ipk
+  opkg install --force-overwrite /tmp/luci-app-tailscale_*_all.ipk
   ```
 
 --------------

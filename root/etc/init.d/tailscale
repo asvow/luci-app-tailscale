@@ -62,8 +62,11 @@ custom_instance() {
 		do
 			echo "tailscale interface $i is started!"
 			if [ -z "$(uci -q get network.$i)" ];  then
+				ts_ip=$(tailscale ip -4)
 				uci set network.$i=interface
 				uci set network.$i.proto='static'
+				uci set network.$i.ipaddr=$ts_ip
+				uci set network.$i.netmask='255.0.0.0'
 				uci set network.$i.device=$i
 			fi
 		done
