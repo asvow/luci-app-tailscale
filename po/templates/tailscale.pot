@@ -84,7 +84,7 @@ msgid "Advanced Settings"
 msgstr ""
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:150
-msgid "Auto NAT clients"
+msgid "Auto Mesh"
 msgstr ""
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:150
@@ -92,7 +92,7 @@ msgid "Expose physical network routes onto Tailscale."
 msgstr ""
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:154
-msgid "Devicename"
+msgid "Device Name"
 msgstr ""
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:154

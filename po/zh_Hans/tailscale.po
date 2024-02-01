@@ -90,7 +90,7 @@ msgid "Advanced Settings"
 msgstr "高级设置"
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:150
-msgid "Auto NAT clients"
+msgid "Auto Mesh"
 msgstr "允许组网"
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:150
@@ -98,7 +98,7 @@ msgid "Expose physical network routes onto Tailscale."
 msgstr "将物理网络路由暴露到Tailscale上。"
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:154
-msgid "Devicename"
+msgid "Device Name"
 msgstr "设备名称"
 
 #: applications/luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/base.js:154

@@ -147,11 +147,11 @@ return view.extend({
 		s = m.section(form.NamedSection, 'settings', 'config');
 		s.title = _('Advanced Settings');
 
-		o = s.option(form.Flag, 'acceptRoutes', _('Auto NAT clients'), _('Expose physical network routes onto Tailscale.'));
+		o = s.option(form.Flag, 'acceptRoutes', _('Auto Mesh'), _('Expose physical network routes onto Tailscale.'));
 		o.default = o.disabled;
 		o.rmempty = false;
 
-		o = s.option(form.Value, 'hostname', _('Devicename'), _("Leave blank to use the device's hostname."));
+		o = s.option(form.Value, 'hostname', _('Device Name'), _("Leave blank to use the device's hostname."));
 		o.default = '';
 		o.rmempty = true;
 
