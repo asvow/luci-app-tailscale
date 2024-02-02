@@ -10,16 +10,16 @@
 			"uci": { "tailscale": true }
 		}
 	},
-	"admin/services/tailscale/base": {
-		"title": "Base settings",
+	"admin/services/tailscale/setting": {
+		"title": "Global Settings",
 		"order": 10,
 		"action": {
 			"type": "view",
-			"path": "tailscale/base"
+			"path": "tailscale/setting"
 		}
 	},
 	"admin/services/tailscale/interface": {
-		"title": "Interface info",
+		"title": "Interface Info",
 		"order": 20,
 		"action": {
 			"type": "view",

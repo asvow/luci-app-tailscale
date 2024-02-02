@@ -20,7 +20,7 @@ section_enabled() {
 
 custom_instance() {
 	local cfg="$1"
-	local port config_path fw_mode std_out std_err state_file
+	local acceptRoutes hostname acceptDNS advertiseExitNode advertiseRoutes loginServer authkey std_out std_err
 	local ARGS=" up --reset"
 
 	if ! section_enabled "$cfg"; then
@@ -30,6 +30,8 @@ custom_instance() {
 
 	config_get_bool acceptRoutes $cfg 'acceptRoutes'
 	config_get hostname $cfg 'hostname'
+	config_get_bool acceptDNS $cfg 'acceptDNS'
+	config_get_bool advertiseExitNode $cfg 'advertiseExitNode'
 	config_get advertiseRoutes $cfg 'advertiseRoutes'
 	config_get loginServer $cfg 'loginServer'
 	config_get authkey $cfg 'authkey'
@@ -38,6 +40,8 @@ custom_instance() {
 
 	[ "$acceptRoutes" = "1" ] && ARGS="$ARGS --accept-routes=true"
 	[ -n "$hostname" ] && ARGS="$ARGS --hostname=$hostname"
+	[ "$acceptDNS" = "0" ] && ARGS="$ARGS --accept-dns=false"
+	[ "$advertiseExitNode" = "1" ] && ARGS="$ARGS --advertise-exit-node"
 	[ -n "$advertiseRoutes" ] && ARGS="$ARGS --advertise-routes=$advertiseRoutes"
 	[ -n "$loginServer" ] && ARGS="$ARGS --login-server=$loginServer"
 	[ -n "$authkey" ] && ARGS="$ARGS --authkey=$authkey"

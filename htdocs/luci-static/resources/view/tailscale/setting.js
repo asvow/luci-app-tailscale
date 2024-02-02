@@ -147,7 +147,7 @@ return view.extend({
 		s = m.section(form.NamedSection, 'settings', 'config');
 		s.title = _('Advanced Settings');
 
-		o = s.option(form.Flag, 'acceptRoutes', _('Auto Mesh'), _('Expose physical network routes onto Tailscale.'));
+		o = s.option(form.Flag, 'acceptRoutes', _('Auto Mesh'), _('Accept subnet routes that other nodes advertise.'));
 		o.default = o.disabled;
 		o.rmempty = false;
 
@@ -155,8 +155,15 @@ return view.extend({
 		o.default = '';
 		o.rmempty = true;
 
-		o = s.option(form.Value, 'advertiseRoutes', _('Expose Subnets'), _('e.g. 10.0.0.0/24'));
-		o.datatype = 'cidr4';
+		o = s.option(form.Flag, 'acceptDNS', _('Accept DNS'), _('Accept DNS configuration from the Tailscale admin console.'));
+		o.default = o.enabled;
+		o.rmempty = false;
+
+		o = s.option(form.Flag, 'advertiseExitNode', _('Exit Node'), _('Offer to be an exit node for outbound internet traffic from the Tailscale network.'));
+		o.default = o.disabled;
+		o.rmempty = false;
+
+		o = s.option(form.Value, 'advertiseRoutes', _('Expose Subnets'), _('Expose physical network routes onto Tailscale. e.g. 10.0.0.0/24'));
 		o.default = '';
 		o.rmempty = true;
 
@@ -173,7 +180,7 @@ return view.extend({
 		s.title = _('Custom Server Settings');
 		s.description = String.format(_('Use %s to deploy a private server.'), '<a href="https://github.com/juanfont/headscale" target="_blank">headscale</a>');
 
-		o = s.option(form.Value, 'loginServer', _('Server address'));
+		o = s.option(form.Value, 'loginServer', _('Server Address'));
 		o.default = '';
 		o.rmempty = true;
 
