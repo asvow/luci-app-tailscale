@@ -18,30 +18,29 @@ var callServiceList = rpc.declare({
 	expect: { '': {} }
 });
 
-function getServiceStatus() {
+function getStatus() {
+	var status = {};
 	return Promise.resolve(callServiceList('tailscale')).then(function (res) {
-		var isRunning = false;
 		try {
-			isRunning = res['tailscale']['instances']['instance1']['running'];
-		} catch (e) { }
-		return isRunning;
-	});
-}
-
-function getLoginStatus() {
-	return fs.exec("/usr/sbin/tailscale", ["status", "--json"]).then(function(res) {
-		var status = JSON.parse(res.stdout);
-		if (!status.AuthURL && status.BackendState == "NeedsLogin") {
+			status.isRunning = res['tailscale']['instances']['instance1']['running'];
+		} catch (e) {
+			status.isRunning = false;
+		}
+		return fs.exec("/usr/sbin/tailscale", ["status", "--json"]);
+	}).then(function(res) {
+		var tailscaleStatus = JSON.parse(res.stdout);
+		if (!tailscaleStatus.AuthURL && tailscaleStatus.BackendState == "NeedsLogin") {
 			fs.exec("/usr/sbin/tailscale", ["login"]);
 		}
-		var displayName = status.BackendState == "Running" ? status.User[status.Self.UserID].DisplayName : undefined;
-		return {
-			backendState: status.BackendState,
-			authURL: status.AuthURL,
-			displayName: displayName
-		};
+		status.backendState = tailscaleStatus.BackendState;
+		status.authURL = tailscaleStatus.AuthURL;
+		status.displayName = status.backendState == "Running" ? tailscaleStatus.User[tailscaleStatus.Self.UserID].DisplayName : undefined;
+		return status;
 	}).catch(function(error) {
-		return { backendState: undefined, authURL: undefined, displayName: undefined };
+		status.backendState = undefined;
+		status.authURL = undefined;
+		status.displayName = undefined;
+		return status;
 	});
 }
 
@@ -75,8 +74,7 @@ function renderLogin(loginStatus, authURL, displayName) {
 return view.extend({
 	load: function() {
 		return Promise.all([
-			uci.load('tailscale'),
-			getServiceStatus()
+			uci.load('tailscale')
 		]);
 	},
 
@@ -89,8 +87,25 @@ return view.extend({
 		s = m.section(form.TypedSection);
 		s.anonymous = true;
 		s.render = function () {
+			poll.add(function() {
+				return Promise.resolve(getStatus()).then(function(res) {
+					var service_view = document.getElementById("service_status");
+					var login_view = document.getElementById("login_status_div");
+					service_view.innerHTML = renderStatus(res.isRunning);	
+					login_view.innerHTML = renderLogin(res.backendState, res.authURL, res.displayName);
+					var logoutButton = document.getElementById('logout_button');
+					if (logoutButton) {
+						logoutButton.onclick = function() {
+							if (confirm(_('Are you sure you want to logout and unbind the current device?'))) {
+								fs.exec("/usr/sbin/tailscale", ["logout"]);
+							}
+						}
+					}
+				});
+			});
+	
 			return E('div', { class: 'cbi-section', id: 'status_bar' }, [
-					E('p', { id: 'service_status' }, renderStatus(isRunning))
+					E('p', { id: 'service_status' }, _('Collecting data ...'))
 			]);
 		}
 
@@ -104,20 +119,6 @@ return view.extend({
 		o = s.option(form.DummyValue, 'login_status', _('Login Status'));
 		o.depends('enabled', '1');
 		o.renderWidget = function(section_id, option_id) {
-			poll.add(function() {
-				return Promise.resolve(getLoginStatus()).then(function(res) {
-					document.getElementById('login_status_div').innerHTML = renderLogin(res.backendState, res.authURL, res.displayName);
-					var logoutButton = document.getElementById('logout_button');
-					if (logoutButton) {
-						logoutButton.onclick = function() {
-							if (confirm(_('Are you sure you want to logout and unbind the current device?'))) {
-								fs.exec("/usr/sbin/tailscale", ["logout"]);
-							}
-						}
-					}
-				});
-			});
-
 			return E('div', { 'id': 'login_status_div' }, _('Collecting data ...'));
 		};
 

@@ -55,41 +55,43 @@ custom_instance() {
 		[ -f "/var/run/tailscale.wait.pid" ] && return
 		touch /var/run/tailscale.wait.pid
 		count=0
-		while [ -z "$(ifconfig | grep 'tailscale' | awk '{print $1}')" ]
+		while [ -z "$(ifconfig | grep 'tailscale' | awk '{print $1}')" ] || [ -z "$(tailscale ip -4)" ]
 		do
 			sleep 2
 			let count++
 			[ "${count}" -ge 5 ] && { rm /var/run/tailscale.wait.pid; exit 19; }
 		done
 		ts0=$(ifconfig | grep 'tailscale' | awk '{print $1}')
-		for i in ${ts0}
-		do
-			echo "tailscale interface $i is started!"
-			if [ -z "$(uci -q get network.$i)" ];  then
+		if [ -z "$(uci -q get network.tailscale)" ];  then				
+			uci set network.tailscale='interface'
+			if [ "$ts0" = *$'\n'* ]; then
+				uci set network.ts_lan='device'
+				uci set network.ts_lan.type='bridge'
+				uci set network.ts_lan.name='ts-lan'
+				for port in "${ts0}"; do
+					uci add_list network.ts_lan.ports=$port
+				done
+				uci set network.tailscale.proto='none'
+				uci set network.tailscale.device='ts-lan'
+			else
 				ts_ip=$(tailscale ip -4)
-				uci set network.$i=interface
-				uci set network.$i.proto='static'
-				uci set network.$i.ipaddr=$ts_ip
-				uci set network.$i.netmask='255.0.0.0'
-				uci set network.$i.device=$i
+				uci set network.tailscale.proto='static'
+				uci set network.tailscale.ipaddr=$ts_ip
+				uci set network.tailscale.netmask='255.0.0.0'
+				uci set network.tailscale.device=$ts0
 			fi
-		done
+		fi
 
 		config_get_bool acceptRoutes $cfg 'acceptRoutes'
 		if [ "$acceptRoutes" == "1" ];  then
 			if [ -z "$(uci -q get firewall.tszone)" ];  then
-				uci set firewall.tszone=zone
+				uci set firewall.tszone='zone'
 				uci set firewall.tszone.input='ACCEPT'
 				uci set firewall.tszone.output='ACCEPT'
 				uci set firewall.tszone.forward='REJECT'
 				uci set firewall.tszone.masq='1'
 				uci set firewall.tszone.name='tailscale'
-				if [ "$ts0" = *$'\n'* ]; then
-					printf '%s\n' "$ts0" | IFS=$'\n' read -ra ts0_array
-					uci add_list firewall.tszone.network ${ts0_array[@]}
-				else
-					uci set firewall.tszone.network=$ts0
-				fi
+				uci set firewall.tszone.network='tailscale'
 			fi
 		else
 			uci -q delete firewall.tszone
@@ -177,12 +179,9 @@ stop_instance() {
 	local cfg="$1"
 	/usr/sbin/tailscaled --cleanup
 
-	# Remove network interfaces
-	ts0="$(ifconfig | grep 'tailscale' | awk '{print $1}')"
-	for i in ${ts0}
-	do
-		uci -q delete network.$i
-	done
+	# Remove network settings
+	uci -q delete network.tailscale
+	uci -q delete network.ts_lan
 	
 	# Remove firewall settings
 	uci -q delete firewall.tszone

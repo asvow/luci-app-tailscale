@@ -7,15 +7,15 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:158
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:159
 msgid "Accept DNS"
 msgstr "允許DNS"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:158
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:159
 msgid "Accept DNS configuration from the Tailscale admin console."
-msgstr "使用Tailscale管理控制台的DNS配置。"
+msgstr "使用 Tailscale 管理控制台的DNS配置。"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:150
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:151
 msgid "Accept subnet routes that other nodes advertise."
 msgstr "接受其他節點廣播的子網路由。"
 
@@ -23,11 +23,11 @@ msgstr "接受其他節點廣播的子網路由。"
 msgid "Access Control"
 msgstr "訪問控制"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:148
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:149
 msgid "Advanced Settings"
 msgstr "高級設置"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:113
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:99
 msgid "Are you sure you want to logout and unbind the current device?"
 msgstr "是否註銷當前登錄並且解綁當前設備？"
 
@@ -35,15 +35,16 @@ msgstr "是否註銷當前登錄並且解綁當前設備？"
 msgid "Auth Key"
 msgstr "認證密鑰"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:150
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:151
 msgid "Auto Mesh"
 msgstr "自動組網"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:98
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:113
 msgid "Basic Settings"
 msgstr "基礎設置"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:121
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:108
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:122
 msgid "Collecting data ..."
 msgstr "正在收集數據..."
 
@@ -51,31 +52,31 @@ msgstr "正在收集數據..."
 msgid "Custom Server Settings"
 msgstr "自定義服務器"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:154
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:155
 msgid "Device Name"
 msgstr "設備名稱"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:100
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:115
 msgid "Enable"
 msgstr "啟用"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:143
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:144
 msgid "Error Log"
 msgstr "錯誤日誌"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:162
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:163
 msgid "Exit Node"
 msgstr "出口節點"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:166
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:167
 msgid "Expose Subnets"
 msgstr "公開網段"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:166
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:167
 msgid "Expose physical network routes onto Tailscale. e.g. 10.0.0.0/24"
-msgstr "廣播子網路由至Tailscale。例如：10.0.0.0/24"
+msgstr "廣播子網路由至 Tailscale。例如：10.0.0.0/24"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:133
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:134
 msgid "Firewall Mode"
 msgstr "防火牆模式"
 
@@ -85,7 +86,7 @@ msgstr "全局設置"
 
 #: luci-app-tailscale/root/usr/share/rpcd/acl.d/luci-app-tailscale.json:3
 msgid "Grant access to Tailscale configuration"
-msgstr "授予訪問Tailscale配置的權限"
+msgstr "授予訪問 Tailscale 配置的權限"
 
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/interface.js:86
 msgid "IPv4 Address"
@@ -107,23 +108,23 @@ msgstr "接口名稱"
 msgid "LAN access Tailscale"
 msgstr "本地局域網訪問虛擬局域網"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:154
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:155
 msgid "Leave blank to use the device's hostname."
 msgstr "留空以使用設備的主機名。"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:139
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:140
 msgid "Logging program activities."
 msgstr "記錄程序運行信息。"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:143
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:144
 msgid "Logging program errors and exceptions."
 msgstr "記錄程序錯誤和異常信息。"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:104
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:119
 msgid "Login Status"
 msgstr "已綁定用戶"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:67
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:66
 msgid "Logout and Unbind"
 msgstr "註銷登錄並解除綁定"
 
@@ -131,12 +132,12 @@ msgstr "註銷登錄並解除綁定"
 msgid "MTU"
 msgstr "MTU"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:54
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:69
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:53
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:68
 msgid "NOT RUNNING"
 msgstr "未運行"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:64
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:63
 msgid "Needs Login"
 msgstr "未登錄"
 
@@ -148,19 +149,19 @@ msgstr "網絡接口信息"
 msgid "No interface online."
 msgstr "無在線接口。"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:162
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:163
 msgid "Offer to be an exit node for outbound internet traffic from the Tailscale network."
-msgstr "作為Tailscale廣域網出口節點。"
+msgstr "作為 Tailscale 廣域網出口節點。"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:139
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:140
 msgid "Output Log"
 msgstr "運行日誌"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:124
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:125
 msgid "Port"
 msgstr "端口"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:52
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:51
 msgid "RUNNING"
 msgstr "運行中"
 
@@ -168,14 +169,14 @@ msgstr "運行中"
 msgid "Server Address"
 msgstr "服務器地址"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:124
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:125
 msgid "Set the Tailscale port number."
-msgstr "設置Tailscale端口號。"
+msgstr "設置 Tailscale 端口號。"
 
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/interface.js:72
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:52
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:54
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:87
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:51
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:53
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:85
 #: luci-app-tailscale/root/usr/share/luci/menu.d/luci-app-tailscale.json:3
 msgid "Tailscale"
 msgstr "Tailscale"
@@ -189,11 +190,11 @@ msgid "Tailscale access WAN"
 msgstr "虛擬局域網訪問本地廣域網"
 
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/interface.js:73
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:87
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:85
 msgid "Tailscale is a cross-platform and easy to use virtual LAN."
-msgstr "Tailscale是一個跨平臺且易於使用的虛擬局域網 VPN。"
+msgstr "Tailscale 是一個跨平臺且易於使用的虛擬局域網 VPN。"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:129
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:130
 msgid "The working directory contains config files, audit logs, and runtime info."
 msgstr "工作目錄包含配置文件、審計日誌和運行時信息。"
 
@@ -221,6 +222,6 @@ msgstr "使用 %s 部署私有服務器"
 msgid "WAN access Tailscale"
 msgstr "本地廣域網訪問虛擬局域網"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:129
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:130
 msgid "Workdir"
 msgstr "工作目錄"
