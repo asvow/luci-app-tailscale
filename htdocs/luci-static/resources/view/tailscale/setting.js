@@ -164,8 +164,14 @@ return view.extend({
 		o.default = o.disabled;
 		o.rmempty = false;
 
+		o = s.option(form.Flag, 's2s', _('Site To Site'), _('Use site-to-site layer 3 networking to connect two subnets on your Tailscale network with each other.'));
+		o.default = o.disabled;
+		o.depends('acceptRoutes', '1');
+		o.rmempty = false;
+
 		o = s.option(form.Value, 'advertiseRoutes', _('Expose Subnets'), _('Expose physical network routes onto Tailscale. e.g. 10.0.0.0/24'));
 		o.default = '';
+		o.depends('acceptRoutes', '1');
 		o.rmempty = true;
 
 		o = s.option(form.MultiValue, 'access', _('Access Control'));

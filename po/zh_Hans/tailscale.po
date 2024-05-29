@@ -7,6 +7,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:167
+msgid "Use site-to-site layer 3 networking to connect two subnets on your Tailscale network with each other."
+msgstr "使用站点到站点的三层网络连接 Tailscale 中的两个子网。"
+
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:159
 msgid "Accept DNS"
 msgstr "允许DNS"
@@ -19,7 +23,7 @@ msgstr "使用 Tailscale 管理控制台的 DNS 配置。"
 msgid "Accept subnet routes that other nodes advertise."
 msgstr "接受其他节点广播的子网路由。"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:171
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:177
 msgid "Access Control"
 msgstr "访问控制"
 
@@ -31,7 +35,7 @@ msgstr "高级设置"
 msgid "Are you sure you want to logout and unbind the current device?"
 msgstr "是否注销当前登录并且解绑当前设备？"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:188
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:194
 msgid "Auth Key"
 msgstr "认证密钥"
 
@@ -48,7 +52,7 @@ msgstr "基础设置"
 msgid "Collecting data ..."
 msgstr "正在收集数据..."
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:181
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:187
 msgid "Custom Server Settings"
 msgstr "自定义服务器"
 
@@ -68,11 +72,11 @@ msgstr "错误日志"
 msgid "Exit Node"
 msgstr "出口节点"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:167
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:172
 msgid "Expose Subnets"
 msgstr "公开网段"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:167
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:172
 msgid "Expose physical network routes onto Tailscale. e.g. 10.0.0.0/24"
 msgstr "广播子网路由至 Tailscale。例如：10.0.0.0/24"
 
@@ -104,7 +108,7 @@ msgstr "接口信息"
 msgid "Interface Name"
 msgstr "接口名称"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:174
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:180
 msgid "LAN access Tailscale"
 msgstr "本地局域网访问虚拟局域网"
 
@@ -165,13 +169,17 @@ msgstr "端口"
 msgid "RUNNING"
 msgstr "运行中"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:184
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:190
 msgid "Server Address"
 msgstr "服务器地址"
 
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:125
 msgid "Set the Tailscale port number."
 msgstr "设置 Tailscale 端口号。"
+
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:167
+msgid "Site To Site"
+msgstr "子网互通"
 
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/interface.js:72
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:51
@@ -181,11 +189,11 @@ msgstr "设置 Tailscale 端口号。"
 msgid "Tailscale"
 msgstr "Tailscale"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:172
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:178
 msgid "Tailscale access LAN"
 msgstr "虚拟局域网访问本地局域网"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:173
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:179
 msgid "Tailscale access WAN"
 msgstr "虚拟局域网访问本地广域网"
 
@@ -214,11 +222,11 @@ msgstr "无法获取接口 %s 的信息：%s。"
 msgid "Unable to get interface info: %s."
 msgstr "无法获取接口信息：%s。"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:182
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:188
 msgid "Use %s to deploy a private server."
 msgstr "使用 %s 部署私有服务器"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:175
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:181
 msgid "WAN access Tailscale"
 msgstr "本地广域网访问虚拟局域网"
 
