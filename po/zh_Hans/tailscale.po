@@ -7,10 +7,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:167
-msgid "Use site-to-site layer 3 networking to connect two subnets on your Tailscale network with each other."
-msgstr "使用站点到站点的三层网络连接 Tailscale 中的两个子网。"
-
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:159
 msgid "Accept DNS"
 msgstr "允许DNS"
@@ -132,6 +128,10 @@ msgstr "已绑定用户"
 msgid "Logout and Unbind"
 msgstr "注销登录并解除绑定"
 
+#: luci-app-tailscale/root/usr/share/luci/menu.d/luci-app-tailscale.json:30
+msgid "Logs"
+msgstr "日志"
+
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/interface.js:94
 msgid "MTU"
 msgstr "MTU"
@@ -152,6 +152,10 @@ msgstr "网络接口信息"
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/interface.js:76
 msgid "No interface online."
 msgstr "无在线接口。"
+
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/log.js:52
+msgid "No logs available"
+msgstr "日志不存在"
 
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:163
 msgid "Offer to be an exit node for outbound internet traffic from the Tailscale network."
@@ -206,6 +210,10 @@ msgstr "Tailscale 是一个跨平台且易于使用的虚拟局域网 VPN。"
 msgid "The working directory contains config files, audit logs, and runtime info."
 msgstr "工作目录包含配置文件、审计日志和运行时信息。"
 
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/log.js:69
+msgid "Toggle Log Order"
+msgstr "切换日志排序"
+
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/interface.js:98
 msgid "Total Download"
 msgstr "总下载量"
@@ -225,6 +233,10 @@ msgstr "无法获取接口信息：%s。"
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:188
 msgid "Use %s to deploy a private server."
 msgstr "使用 %s 部署私有服务器"
+
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:167
+msgid "Use site-to-site layer 3 networking to connect two subnets on your Tailscale network with each other."
+msgstr "使用站点到站点的三层网络连接 Tailscale 中的两个子网。"
 
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:181
 msgid "WAN access Tailscale"

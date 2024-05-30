@@ -25,5 +25,13 @@
 			"type": "view",
 			"path": "tailscale/interface"
 		}
+	},
+	"admin/services/tailscale/log": {
+		"title": "Logs",
+		"order": 30,
+		"action": {
+			"type": "view",
+			"path": "tailscale/log"
+		}
 	}
 }

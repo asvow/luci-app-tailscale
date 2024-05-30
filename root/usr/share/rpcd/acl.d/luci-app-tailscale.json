@@ -4,6 +4,7 @@
 		"read": {
 			"file": {
 				"/sbin/ifconfig": [ "exec" ],
+				"/sbin/logread": [ "exec" ],
 				"/usr/sbin/tailscale": [ "exec" ]
 			},
 			"ubus": {

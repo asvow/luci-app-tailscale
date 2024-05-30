@@ -1,10 +1,6 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
-#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:167
-msgid "Use site-to-site layer 3 networking to connect two subnets on your Tailscale network with each other."
-msgstr ""
-
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:159
 msgid "Accept DNS"
 msgstr ""
@@ -126,6 +122,10 @@ msgstr ""
 msgid "Logout and Unbind"
 msgstr ""
 
+#: luci-app-tailscale/root/usr/share/luci/menu.d/luci-app-tailscale.json:30
+msgid "Logs"
+msgstr ""
+
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/interface.js:94
 msgid "MTU"
 msgstr ""
@@ -145,6 +145,10 @@ msgstr ""
 
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/interface.js:76
 msgid "No interface online."
+msgstr ""
+
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/log.js:52
+msgid "No logs available"
 msgstr ""
 
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:163
@@ -200,6 +204,10 @@ msgstr ""
 msgid "The working directory contains config files, audit logs, and runtime info."
 msgstr ""
 
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/log.js:69
+msgid "Toggle Log Order"
+msgstr ""
+
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/interface.js:98
 msgid "Total Download"
 msgstr ""
@@ -218,6 +226,10 @@ msgstr ""
 
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:188
 msgid "Use %s to deploy a private server."
+msgstr ""
+
+#: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:167
+msgid "Use site-to-site layer 3 networking to connect two subnets on your Tailscale network with each other."
 msgstr ""
 
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:181
