@@ -24,7 +24,7 @@ return view.extend({
 							'daemon.notice': { status: 'Info', startIndex: 10 }
 						};
 						self.logs = res.stdout.split('\n').map(function(log) {
-							var logParts = log.split(' ');
+							var logParts = log.split(' ').filter(Boolean);
 							if (logParts.length >= 6) {
 								var formattedTime = logParts[1] + ' ' + logParts[2] + ' - ' + logParts[3];
 								var status = logParts[5];
