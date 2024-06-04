@@ -2,6 +2,12 @@
 
 Tailscale is a zero config VPN for building secure networks.
 
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/asvow/luci-app-tailscale?style=flat-square)](https://github.com/asvow/luci-app-tailscale/releases)
+[![GitHub stars](https://img.shields.io/github/stars/asvow/luci-app-tailscale?style=flat-square)](https://github.com/asvow/luci-app-tailscale/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/asvow/luci-app-tailscale?style=flat-square)](https://github.com/asvow/luci-app-tailscale/network/members)
+[![License](https://img.shields.io/github/license/asvow/luci-app-tailscale?style=flat-square)](LICENSE)
+[![GitHub All Releases](https://img.shields.io/github/downloads/asvow/luci-app-tailscale/total?style=flat-square)](https://github.com/asvow/luci-app-tailscale/releases)
+
 ## How to build
 
 - Only compatible with luci2 version
@@ -30,7 +36,7 @@ Tailscale is a zero config VPN for building secure networks.
 
   ```shell
   opkg update
-  opkg install --force-overwrite /tmp/luci-app-tailscale_*_all.ipk
+  opkg install --force-overwrite /tmp/luci-*-tailscale*.ipk
   ```
 
 --------------
