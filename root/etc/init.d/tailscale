@@ -20,7 +20,7 @@ section_enabled() {
 
 custom_instance() {
 	local cfg="$1"
-	local acceptRoutes hostname acceptDNS advertiseExitNode s2s advertiseRoutes loginServer authkey std_out std_err
+	local acceptRoutes hostname acceptDNS advertiseExitNode advertiseRoutes s2s flags loginServer authkey std_out std_err
 	local ARGS=" up --reset"
 
 	if ! section_enabled "$cfg"; then
@@ -32,8 +32,9 @@ custom_instance() {
 	config_get hostname $cfg 'hostname'
 	config_get_bool acceptDNS $cfg 'acceptDNS'
 	config_get_bool advertiseExitNode $cfg 'advertiseExitNode'
-	config_get_bool s2s $cfg 's2s'
 	config_get advertiseRoutes $cfg 'advertiseRoutes'
+	config_get_bool s2s $cfg 's2s'
+	config_get flags $cfg 'flags'
 	config_get loginServer $cfg 'loginServer'
 	config_get authkey $cfg 'authkey'
 	config_get_bool std_out $cfg 'log_stdout'
@@ -43,8 +44,9 @@ custom_instance() {
 	[ -n "$hostname" ] && ARGS="$ARGS --hostname=$hostname"
 	[ "$acceptDNS" = "0" ] && ARGS="$ARGS --accept-dns=false"
 	[ "$advertiseExitNode" = "1" ] && ARGS="$ARGS --advertise-exit-node"
-	[ "$s2s" = "1" ] && ARGS="$ARGS --snat-subnet-routes=false --stateful-filtering=false"
 	[ -n "$advertiseRoutes" ] && ARGS="$ARGS --advertise-routes=$advertiseRoutes"
+	[ "$s2s" = "1" ] && ARGS="$ARGS --snat-subnet-routes=false --stateful-filtering=false"
+	[ -n "$flags" ] && ARGS="$ARGS $flags"
 	[ -n "$loginServer" ] && ARGS="$ARGS --login-server=$loginServer"
 	[ -n "$authkey" ] && ARGS="$ARGS --authkey=$authkey"
 

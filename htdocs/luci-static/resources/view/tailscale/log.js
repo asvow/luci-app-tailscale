@@ -23,20 +23,22 @@ return view.extend({
 							'daemon.err': { status: 'StdErr', startIndex: 9 },
 							'daemon.notice': { status: 'Info', startIndex: 10 }
 						};
-						self.logs = res.stdout.split('\n').map(function(log) {
-							var logParts = log.split(' ').filter(Boolean);
-							if (logParts.length >= 6) {
-								var formattedTime = logParts[1] + ' ' + logParts[2] + ' - ' + logParts[3];
-								var status = logParts[5];
-								var mapping = statusMappings[status] || { status: status, startIndex: 9 };
-								status = mapping.status;
-								var startIndex = mapping.startIndex;
-								var message = logParts.slice(startIndex).join(' ');
-								return formattedTime + ' [ ' + status + ' ] - ' + message;
-							} else {
-								return '';
-							}
-						}).filter(Boolean);
+						if (res.stdout) {
+							self.logs = res.stdout.split('\n').map(function(log) {
+								var logParts = log.split(' ').filter(Boolean);
+								if (logParts.length >= 6) {
+									var formattedTime = logParts[1] + ' ' + logParts[2] + ' - ' + logParts[3];
+									var status = logParts[5];
+									var mapping = statusMappings[status] || { status: status, startIndex: 9 };
+									status = mapping.status;
+									var startIndex = mapping.startIndex;
+									var message = logParts.slice(startIndex).join(' ');
+									return formattedTime + ' [ ' + status + ' ] - ' + message;
+								} else {
+									return '';
+								}
+							}).filter(Boolean);
+						}
 						self.updateLogView();
 					} else {
 						throw new Error(res.stdout + ' ' + res.stderr);
@@ -48,7 +50,7 @@ return view.extend({
 	updateLogView: function() {
 		var view = document.getElementById('syslog');
 		var logs = this.logs;
-		if (logs.length === 0) {
+		if (logs.length <= 100) {
 			view.textContent = _('No logs available');
 			return;
 		}

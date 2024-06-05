@@ -110,78 +110,80 @@ return view.extend({
 		}
 
 		s = m.section(form.NamedSection, 'settings', 'config');
-		s.title = _('Basic Settings');
+		s.tab('basic',_('Basic Settings'));
 
-		o = s.option(form.Flag, 'enabled', _('Enable'));
+		o = s.taboption('basic',form.Flag, 'enabled', _('Enable'));
 		o.default = o.disabled;
 		o.rmempty = false;
 
-		o = s.option(form.DummyValue, 'login_status', _('Login Status'));
+		o = s.taboption('basic',form.DummyValue, 'login_status', _('Login Status'));
 		o.depends('enabled', '1');
 		o.renderWidget = function(section_id, option_id) {
 			return E('div', { 'id': 'login_status_div' }, _('Collecting data ...'));
 		};
 
-		o = s.option(form.Value, 'port', _('Port'), _('Set the Tailscale port number.'));
+		o = s.taboption('basic',form.Value, 'port', _('Port'), _('Set the Tailscale port number.'));
 		o.datatype = 'port';
 		o.default = '41641';
 		o.rmempty = false;
 
-		o = s.option(form.Value, 'config_path', _('Workdir'), _('The working directory contains config files, audit logs, and runtime info.'));
+		o = s.taboption('basic',form.Value, 'config_path', _('Workdir'), _('The working directory contains config files, audit logs, and runtime info.'));
 		o.default = '/etc/tailscale';
 		o.rmempty = false;
 
-		o = s.option(form.ListValue, 'fw_mode', _('Firewall Mode'));
+		o = s.taboption('basic',form.ListValue, 'fw_mode', _('Firewall Mode'));
 		o.value('nftables', 'nftables');
 		o.value('iptables', 'iptables');
 		o.default = 'nftables';
 		o.rmempty = false;
 
-		o = s.option(form.Flag, 'log_stdout', _('Output Log'), _('Logging program activities.'));
+		o = s.taboption('basic',form.Flag, 'log_stdout', _('StdOut Log'), _('Logging program activities.'));
 		o.default = o.enabled;
 		o.rmempty = false;
 
-		o = s.option(form.Flag, 'log_stderr', _('Error Log'), _('Logging program errors and exceptions.'));
+		o = s.taboption('basic',form.Flag, 'log_stderr', _('StdErr Log'), _('Logging program errors and exceptions.'));
 		o.default = o.enabled;
 		o.rmempty = false;
 
-		s = m.section(form.NamedSection, 'settings', 'config');
-		s.title = _('Advanced Settings');
+		s.tab('advance',_('Advanced Settings'));
 
-		o = s.option(form.Flag, 'acceptRoutes', _('Auto Mesh'), _('Accept subnet routes that other nodes advertise.'));
+		o = s.taboption('advance',form.Flag, 'acceptRoutes', _('Auto Mesh'), _('Accept subnet routes that other nodes advertise.'));
 		o.default = o.disabled;
 		o.rmempty = false;
 
-		o = s.option(form.Value, 'hostname', _('Device Name'), _("Leave blank to use the device's hostname."));
+		o = s.taboption('advance',form.Value, 'hostname', _('Device Name'), _("Leave blank to use the device's hostname."));
 		o.default = '';
 		o.rmempty = true;
 
-		o = s.option(form.Flag, 'acceptDNS', _('Accept DNS'), _('Accept DNS configuration from the Tailscale admin console.'));
+		o = s.taboption('advance',form.Flag, 'acceptDNS', _('Accept DNS'), _('Accept DNS configuration from the Tailscale admin console.'));
 		o.default = o.enabled;
 		o.rmempty = false;
 
-		o = s.option(form.Flag, 'advertiseExitNode', _('Exit Node'), _('Offer to be an exit node for outbound internet traffic from the Tailscale network.'));
+		o = s.taboption('advance',form.Flag, 'advertiseExitNode', _('Exit Node'), _('Offer to be an exit node for outbound internet traffic from the Tailscale network.'));
 		o.default = o.disabled;
 		o.rmempty = false;
 
-		o = s.option(form.Flag, 's2s', _('Site To Site'), _('Use site-to-site layer 3 networking to connect two subnets on your Tailscale network with each other.'));
-		o.default = o.disabled;
-		o.depends('acceptRoutes', '1');
-		o.rmempty = false;
-
-		o = s.option(form.Value, 'advertiseRoutes', _('Expose Subnets'), _('Expose physical network routes onto Tailscale. e.g. 10.0.0.0/24'));
+		o = s.taboption('advance',form.Value, 'advertiseRoutes', _('Expose Subnets'), _('Expose physical network routes into Tailscale, e.g. <code>10.0.0.0/24</code>.'));
 		o.default = '';
 		o.depends('acceptRoutes', '1');
 		o.rmempty = true;
 
-		o = s.option(form.MultiValue, 'access', _('Access Control'));
+		o = s.taboption('advance',form.Flag, 's2s', _('Site To Site'), _('Use site-to-site layer 3 networking to connect subnets on the Tailscale network.'));
+		o.default = o.disabled;
+		o.depends('acceptRoutes', '1');
+		o.rmempty = false;
+
+		o = s.taboption('advance',form.MultiValue, 'access', _('Access Control'));
 		o.value('tsfwlan', _('Tailscale access LAN'));
 		o.value('tsfwwan', _('Tailscale access WAN'));
 		o.value('lanfwts', _('LAN access Tailscale'));
 		o.value('wanfwts', _('WAN access Tailscale'));
 		o.default = "tsfwlan tsfwwan lanfwts";
-		o.depends('acceptRoutes', '1');
 		o.rmempty = false;
+
+		s.tab('extra',_('Extra Settings'));
+
+		o = s.taboption('extra', form.DynamicList, 'flags', _('Additional Flags'), String.format(_('List of extra flags. Format: --flags=value, e.g. <code>--exit-node=10.0.0.1</code>. <br> %s for enabling settings upon the initiation of Tailscale.'), '<a href="https://tailscale.com/kb/1080/cli#up" target="_blank">' + _('Available flags') + '</a>'));
 
 		s = m.section(form.NamedSection, 'settings', 'config');
 		s.title = _('Custom Server Settings');
