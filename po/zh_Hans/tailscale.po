@@ -122,7 +122,7 @@ msgstr "留空以使用设备的主机名。"
 
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:186
 msgid "List of extra flags. Format: --flags=value, e.g. <code>--exit-node=10.0.0.1</code>. <br> %s for enabling settings upon the initiation of Tailscale."
-msgstr "额外参数的列表。格式：--flags=value，例如 <code>--exit-node=10.0.0.1</code>。<br> 在 Tailscale 启动时的 %s 。"
+msgstr "额外参数的列表。格式：--flags=value，例如 <code>--exit-node=10.0.0.1</code>。<br> 在 Tailscale 启动时的%s。"
 
 #: luci-app-tailscale/htdocs/luci-static/resources/view/tailscale/setting.js:140
 msgid "Logging program activities."

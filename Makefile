@@ -5,10 +5,10 @@
 include $(TOPDIR)/rules.mk
 
 LUCI_TITLE:=LuCI for Tailscale
-LUCI_DEPENDS:=+tailscale +jsonfilter +ucode
+LUCI_DEPENDS:=+tailscale
 LUCI_PKGARCH:=all
 
-PKG_VERSION:=1.1.0
+PKG_VERSION:=1.1.1
 
 include $(TOPDIR)/feeds/luci/luci.mk
 
